@@ -17,31 +17,22 @@ $pag = "estados";
             </div>
         </div>
     </form>
-    <div id="listar">
-        <table class="table" style="margin-top: 20px;">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Rio de Janeiro</td>
-                </tr>
-            </tbody>
-        </table>
+    <div id="listar" style="margin-top: 20px;">
+        
     </div>
 </div>
 
 <!-- criando variavel do javascript para pegar a variavel $pag do php -->
 <script type="text/javascript">
     var pag = "<?= $pag ?>"
-</script>
 
-<!-- Script ajax para inserção de dados, isso é, não vai ter refresh na página -->
-<script type="text/javascript">
+    // esse método é para quando a página carregar, já listar os dados
+    $(document).ready( function () {	
+        listar();
+});
+
+
+    // Script ajax para inserção de dados, isso é, não vai ter refresh na página
     // o $ com o nome do componente significa que está tentando via jquery e não javascript chamar e dar referencia a um objeto que tenha esse id
     $("#form").submit(function() {
 
@@ -64,6 +55,7 @@ $pag = "estados";
                     // $('#mensagem').addClass('text-success');
                     // $('#mensagem').text(mensagem)
                     listar();
+                    limparCampos();
 
                 } else {
 
@@ -81,10 +73,10 @@ $pag = "estados";
         });
 
     });
-</script>
 
-<!-- Script ajax para listar os dados -->
-<script type="text/javascript">
+
+    // Script ajax para listar os dados, isso é, não vai ter refresh na página
+
     function listar(p1, p2, p3, p4, p5, p6) {
         $.ajax({
             // concatenando a variavel pag com o caminho do arquivo listar.php
@@ -104,5 +96,10 @@ $pag = "estados";
                 $("#listar").html(result);
             }
         });
+    }
+
+    function limparCampos() {
+        // o $ com o nome do componente significa que está tentando via jquery e não javascript chamar e dar referencia a um objeto que tenha esse id, e o .val('') é para limpar esse campo
+        $('#nome').val('');
     }
 </script>
