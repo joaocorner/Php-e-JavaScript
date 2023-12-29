@@ -1,5 +1,6 @@
 <?php
 require_once('cabecalho.php');
+$pag = "estados";
 ?>
 
 <div class="container" style="background: #f5f2f2; padding: 10px">
@@ -34,6 +35,11 @@ require_once('cabecalho.php');
     </div>
 </div>
 
+<!-- criando variavel do javascript para pegar a variavel $pag do php -->
+<script type="text/javascript">
+    var pag = "<?= $pag ?>"
+</script>
+
 <!-- Script ajax para inserção de dados, isso é, não vai ter refresh na página -->
 <script type="text/javascript">
     // o $ com o nome do componente significa que está tentando via jquery e não javascript chamar e dar referencia a um objeto que tenha esse id
@@ -46,7 +52,7 @@ require_once('cabecalho.php');
 
         // esse ajax pega os dados (formData) e envia para o caminho da url (estados.php) via post
         $.ajax({
-            url: 'estados/salvar.php',
+            url: pag + "/salvar.php",
             type: 'POST',
             data: formData,
 
@@ -55,9 +61,9 @@ require_once('cabecalho.php');
                 $('#mensagem').removeClass()
                 if (mensagem.trim() == "Salvo com Sucesso") {
 
-                    $('#mensagem').addClass('text-success');
-                    $('#mensagem').text(mensagem)
-                    // listar();
+                    // $('#mensagem').addClass('text-success');
+                    // $('#mensagem').text(mensagem)
+                    listar();
 
                 } else {
 
@@ -75,4 +81,28 @@ require_once('cabecalho.php');
         });
 
     });
+</script>
+
+<!-- Script ajax para listar os dados -->
+<script type="text/javascript">
+    function listar(p1, p2, p3, p4, p5, p6) {
+        $.ajax({
+            // concatenando a variavel pag com o caminho do arquivo listar.php
+            url: pag + "/listar.php",
+            method: 'POST',
+            data: {
+                p1,
+                p2,
+                p3,
+                p4,
+                p5,
+                p6
+            },
+            dataType: "html",
+
+            success: function(result) {
+                $("#listar").html(result);
+            }
+        });
+    }
 </script>
