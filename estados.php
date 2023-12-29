@@ -11,4 +11,24 @@ require_once('cabecalho.php');
             <button class="btn btn-primary">Salvar</button>
         </div>
     </div>
+
+    <div id="listar">
+        <table class="table" style="margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Rio de Janeiro</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
 </div>
