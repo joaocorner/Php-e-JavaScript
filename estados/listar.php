@@ -35,7 +35,7 @@ HTML;
 </td>
 
 <td>
-    <a href="#"><i class="bi bi-pencil text-primary"></i></a>	
+    <a href="#" onclick="editar('{$id}', '{$nome}')"><i class="bi bi-pencil text-primary"></i></a>	
     <a href="#" onclick="excluir('{$id}')"><i class="bi bi-trash3 text-danger"></i></a>	
 </td>
 </tr>
@@ -73,5 +73,13 @@ HTML;
                 }
             }
         });
+    }
+
+    function editar(id, nome) {
+        // utiliza-se o .val em vez do .text, pois o .text é para texto em divs e spams, e o .val é para inputs
+        $('#nome').val(nome);
+        $('#id').val(id);
+        console.log(id);
+        console.log(nome);
     }
 </script>

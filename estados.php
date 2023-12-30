@@ -15,6 +15,7 @@ $pag = "estados";
             <div class="col-md-8">
                 <div id="mensagem"></div>
             </div>
+            <input type="hidden" name="id" id="id">
         </div>
     </form>
     <div id="listar" style="margin-top: 20px;">
@@ -29,6 +30,7 @@ $pag = "estados";
     // esse método é para quando a página carregar, já listar os dados
     $(document).ready( function () {	
         listar();
+        limparCampos();
 });
 
 
@@ -101,5 +103,6 @@ $pag = "estados";
     function limparCampos() {
         // o $ com o nome do componente significa que está tentando via jquery e não javascript chamar e dar referencia a um objeto que tenha esse id, e o .val('') é para limpar esse campo
         $('#nome').val('');
+        $('#id').val('');
     }
 </script>
