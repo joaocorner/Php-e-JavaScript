@@ -20,6 +20,12 @@ require_once('conexao.php');
     <!-- cdn do bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
+    <!-- Mascaras JS -->
+    <script type="text/javascript" src="mascaras.js"></script>
+
+    <!-- Ajax para funcionar Mascaras JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
 </head>
 
 <body>

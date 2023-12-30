@@ -14,14 +14,14 @@ $pag = "clientes";
                 <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-1" style="padding: 0px;">
                 <select class="form-select" id="pessoa" name="pessoa">
                     <option value="Física">Física</option>
                     <option value="Jurídica">Jurídica</option>
                 </select>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding: 0px; padding-left: 2px">
                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
             </div>
 
