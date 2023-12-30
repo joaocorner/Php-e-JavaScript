@@ -79,6 +79,9 @@ HTML;
         // utiliza-se o .val em vez do .text, pois o .text é para texto em divs e spams, e o .val é para inputs
         $('#nome').val(nome);
         $('#id').val(id);
+        $('#btn_salvar').text('Editar');
+        $('#btn_salvar').removeClass('btn-success');
+        $('#btn_salvar').addClass('btn-primary');
         console.log(id);
         console.log(nome);
     }

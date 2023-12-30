@@ -7,10 +7,10 @@ $pag = "estados";
     <form id="form">
         <div class="row">
             <div class="col-md-2">
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Sigla">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Sigla" required>
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" id="btn_salvar" class="btn btn-success">Salvar</button>
             </div>
             <div class="col-md-8">
                 <div id="mensagem"></div>
@@ -19,7 +19,7 @@ $pag = "estados";
         </div>
     </form>
     <div id="listar" style="margin-top: 20px;">
-        
+
     </div>
 </div>
 
@@ -28,10 +28,10 @@ $pag = "estados";
     var pag = "<?= $pag ?>"
 
     // esse método é para quando a página carregar, já listar os dados
-    $(document).ready( function () {	
+    $(document).ready(function() {
         listar();
         limparCampos();
-});
+    });
 
 
     // Script ajax para inserção de dados, isso é, não vai ter refresh na página
@@ -42,6 +42,9 @@ $pag = "estados";
         event.preventDefault();
         // formData é um objeto que vai pegar todos os dados do formulário
         var formData = new FormData(this);
+
+        $('#btn_salvar').hide()
+        $('#mensagem').text('Salvando...')
 
         // esse ajax pega os dados (formData) e envia para o caminho da url (estados.php) via post
         $.ajax({
@@ -65,8 +68,11 @@ $pag = "estados";
                     $('#mensagem').text(mensagem)
                 }
 
+                $('#btn_salvar').show()
+
 
             },
+
 
             cache: false,
             contentType: false,
@@ -104,5 +110,7 @@ $pag = "estados";
         // o $ com o nome do componente significa que está tentando via jquery e não javascript chamar e dar referencia a um objeto que tenha esse id, e o .val('') é para limpar esse campo
         $('#nome').val('');
         $('#id').val('');
+        $('#btn_salvar').text('Salvar');
+        $('#btn_salvar').addClass('btn-success');
     }
 </script>
