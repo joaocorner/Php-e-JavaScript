@@ -7,22 +7,22 @@ $pag = "clientes";
     <form id="form">
         <div class="row">
             <div class="col-md-3">
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="nome">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="nome" required>
             </div>
 
             <div class="col-md-2">
-                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
             </div>
 
             <div class="col-md-1">
-                <select class="form-select" id="estado" name="estado">
+                <select class="form-select" id="pessoa" name="pessoa">
                     <option value="Física">Física</option>
                     <option value="Jurídica">Jurídica</option>
                 </select>
             </div>
 
             <div class="col-md-2">
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
             </div>
 
             <div class="col-md-2">
@@ -137,6 +137,11 @@ $pag = "clientes";
     function limparCampos() {
         $('#nome').val('');
         $('#id').val('');
+        $('#telefone').val('');
+        $('#pessoa').val('');
+        $('#cpf').val('');
+        $('#cidade').val('');
+        $('#estado').val('');
         $('#btn_salvar').text('Salvar');
         $('#btn_salvar').addClass('btn-success');
     }

@@ -1,5 +1,5 @@
 <?php
-$tabela = 'cidades';
+$tabela = 'clientes';
 require_once("../conexao.php");
 
 $query = $pdo->query("SELECT * from $tabela order by id desc");
@@ -11,8 +11,11 @@ if ($linhas > 0) {
 	<table class="table">
 	<thead> 
 	<tr>
-	<th>Id</th>	
 	<th>Nome</th>
+	<th>Telefone</th>
+	<th>Pessoa</th>
+	<th>CPF / CNPJ</th>
+	<th>Cidade</th>
 	<th>Estado</th>
 	<th>Ações</th>
 	</tr> 
@@ -24,23 +27,24 @@ HTML;
     for ($i = 0; $i < $linhas; $i++) {
         $id = $res[$i]['id'];
         $nome = $res[$i]['nome'];
+        $telefone = $res[$i]['telefone'];
+        $pessoa = $res[$i]['pessoa'];
+        $cpf = $res[$i]['cpf'];
+        $cidade = $res[$i]['cidade'];
         $estado = $res[$i]['estado'];
 
 
         echo <<<HTML
 <tr>
-<td>
-{$id}
-</td>
-<td>
-{$nome}
-</td>
-<td>
-{$estado}
-</td>
+<td>{$nome}</td>
+<td>{$telefone}</td>
+<td>{$pessoa}</td>
+<td>{$cpf}</td>
+<td>{$cidade}</td>
+<td>{$estado}</td>
 
 <td>
-    <a href="#" onclick="editar('{$id}', '{$nome}', '{$estado}')"><i class="bi bi-pencil text-primary"></i></a>	
+    <a href="#" onclick="editar('{$id}', '{$nome}', '{$telefone}', '{$pessoa}', '{$cpf}', '{$cidade}', '{$estado}')"><i class="bi bi-pencil text-primary"></i></a>	
     <a href="#" onclick="excluir('{$id}')"><i class="bi bi-trash3 text-danger"></i></a>	
 </td>
 </tr>
@@ -79,9 +83,14 @@ HTML;
         });
     }
 
-    function editar(id, nome, estado) {
+    function editar(id, nome, telefone, pessoa, cpf, cidade, estado) {
         $('#nome').val(nome);
         $('#id').val(id);
+        $('#telefone').val(telefone);
+        $('#pessoa').val(pessoa).change();
+        $('#cpf').val(cpf);
+        $('#cidade').val(cidade).change();
+        $('#estado').val(estado).change();
         // o .change() é para forçar a mudança do valor do select, isso é, o jquery vai mudar o valor do select e vai forçar a mudança do valor do select
         $('#estado').val(estado).change();
         $('#btn_salvar').text('Editar');
