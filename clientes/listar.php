@@ -89,8 +89,12 @@ HTML;
         $('#telefone').val(telefone);
         $('#pessoa').val(pessoa).change();
         $('#cpf').val(cpf);
-        $('#cidade').val(cidade).change();
         $('#estado').val(estado).change();
+        setTimeout(function() {
+            $('#cidade').val(cidade).change();
+            console.log("Código sendo executado após 1 segundos!")
+        }, 400);
+
         // o .change() é para forçar a mudança do valor do select, isso é, o jquery vai mudar o valor do select e vai forçar a mudança do valor do select
         $('#estado').val(estado).change();
         $('#btn_salvar').text('Editar');

@@ -38,17 +38,8 @@ $pag = "clientes";
                 </select>
             </div>
 
-            <div class="col-md-2">
-                <select type="text" class="form-select" id="cidade" name="cidade">
-                    <?php
-                    $query = $pdo->query("SELECT * from cidades order by id desc");
-                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                    $linhas = @count($res);
-                    for ($i = 0; $i < $linhas; $i++) {
-                        echo '<option value="' . $res[$i]['nome'] . '">' . $res[$i]['nome'] . '</option>';
-                    }
-                    ?>
-                </select>
+            <div class="col-md-2" id="listar_cidades">
+
             </div>
 
             <div class="col-md-1">
@@ -74,6 +65,10 @@ $pag = "clientes";
     $(document).ready(function() {
         listar();
         limparCampos();
+        mudarEstado();
+
+        // nesse caso, o setInterval é para ficar realizando a função listar a cada 3 segundos, útil para quando tiver mais de um usuário cadastrando ao mesmo tempo por exemplo e um deles cadastrar, o outro já vai ver a alteração
+        setInterval(listar, 3000);
     });
 
 
@@ -116,6 +111,7 @@ $pag = "clientes";
     });
 
     function listar(p1, p2, p3, p4, p5, p6) {
+        console.log('listar foi chamado');
         $.ajax({
             url: pag + "/listar.php",
             method: 'POST',
@@ -139,10 +135,8 @@ $pag = "clientes";
         $('#nome').val('');
         $('#id').val('');
         $('#telefone').val('');
-        $('#pessoa').val('');
+        $('#pessoa').val('Física');
         $('#cpf').val('');
-        $('#cidade').val('');
-        $('#estado').val('');
         $('#btn_salvar').text('Salvar');
         $('#btn_salvar').addClass('btn-success');
     }
@@ -159,4 +153,20 @@ $pag = "clientes";
         }
     }
 
+    function mudarEstado() {
+        var estado = $('#estado').val();
+        console.log(estado);
+        $.ajax({
+            url: pag + "/listar_cidades.php",
+            method: 'POST',
+            data: {
+                estado
+            },
+            dataType: "html",
+
+            success: function(result) {
+                $("#listar_cidades").html(result);
+            }
+        });
+    }
 </script>
