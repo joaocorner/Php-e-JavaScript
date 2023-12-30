@@ -15,7 +15,7 @@ $pag = "clientes";
             </div>
 
             <div class="col-md-1" style="padding: 0px;">
-                <select class="form-select" id="pessoa" name="pessoa">
+                <select class="form-select" id="pessoa" name="pessoa" onchange="mudarPessoa()">
                     <option value="Física">Física</option>
                     <option value="Jurídica">Jurídica</option>
                 </select>
@@ -23,6 +23,19 @@ $pag = "clientes";
 
             <div class="col-md-2" style="padding: 0px; padding-left: 2px">
                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+            </div>
+
+            <div class="col-md-1">
+                <select type="text" class="form-select" id="estado" name="estado" onchange="mudarEstado()">
+                    <?php
+                    $query = $pdo->query("SELECT * from estados order by id desc");
+                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    $linhas = @count($res);
+                    for ($i = 0; $i < $linhas; $i++) {
+                        echo '<option value="' . $res[$i]['nome'] . '">' . $res[$i]['nome'] . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
 
             <div class="col-md-2">
@@ -38,18 +51,6 @@ $pag = "clientes";
                 </select>
             </div>
 
-            <div class="col-md-1">
-                <select type="text" class="form-select" id="estado" name="estado">
-                    <?php
-                    $query = $pdo->query("SELECT * from estados order by id desc");
-                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                    $linhas = @count($res);
-                    for ($i = 0; $i < $linhas; $i++) {
-                        echo '<option value="' . $res[$i]['nome'] . '">' . $res[$i]['nome'] . '</option>';
-                    }
-                    ?>
-                </select>
-            </div>
             <div class="col-md-1">
                 <button id="btn_salvar" type="submit" class="btn btn-primary">Salvar</button>
             </div>
@@ -145,4 +146,17 @@ $pag = "clientes";
         $('#btn_salvar').text('Salvar');
         $('#btn_salvar').addClass('btn-success');
     }
+
+    function mudarPessoa() {
+        var pessoa = $('#pessoa').val();
+        console.log(pessoa);
+        if (pessoa == 'Física') {
+            $('#cpf').attr('placeholder', 'CPF');
+            $('#cpf').mask('000.000.000-00');
+        } else {
+            $('#cpf').attr('placeholder', 'CNPJ');
+            $('#cpf').mask('00.000.000/0000-00');
+        }
+    }
+
 </script>
