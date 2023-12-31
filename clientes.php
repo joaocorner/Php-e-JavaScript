@@ -56,8 +56,20 @@ $pag = "clientes";
     </form>
     <div id="listar" style="margin-top: 20px;"></div>
 
-    <div class="col-md-2" style="padding: 0px; padding-left: 2px">
-        <input type="text" class="form-control" id="telefone_busca" placeholder="Telefone" required onkeyup="buscarDados()">
+    <div class="row">
+        <div class="col-md-2" style="">
+            <input type="text" class="form-control" id="telefone_busca" placeholder="Telefone" required onkeyup="buscarDados()">
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary">
+                <!-- poderia passar onclick="buscarDados()" para ativar ao clicar nesse botão ao invés de buscar ao ir preenchendo -->
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+        <div class="col-md-9">
+            <span style="margin-right: 10px;"><b>Cliente: </b><span id="nome_cliente"></span></span>
+            <span style="margin-right: 10px;"><b>Cidade: </b><span id="cidade_cliente"></span></span>
+        </div>
     </div>
 
 </div>
@@ -196,6 +208,10 @@ $pag = "clientes";
                     $("#pessoa").val(separar[3]).change();
                     $("#cpf").val(separar[4]);
                     $("#estado").val(separar[6]).change();
+                    $("#nome_cliente").text(separar[1]);
+                    $('#cidade_cliente').text(separar[5]).change();
+
+
                     setTimeout(function() {
                         $('#cidade').val(separar[5]).change();
                     }, 400);
