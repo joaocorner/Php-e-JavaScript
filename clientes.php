@@ -54,9 +54,12 @@ $pag = "clientes";
             </small>
         </div>
     </form>
-    <div id="listar" style="margin-top: 20px;">
+    <div id="listar" style="margin-top: 20px;"></div>
 
+    <div class="col-md-2" style="padding: 0px; padding-left: 2px">
+        <input type="text" class="form-control" id="telefone_busca" placeholder="Telefone" required onkeyup="buscarDados()">
     </div>
+
 </div>
 
 <script type="text/javascript">
@@ -111,7 +114,7 @@ $pag = "clientes";
     });
 
     function listar(p1, p2, p3, p4, p5, p6) {
-        console.log('listar foi chamado');
+        // console.log('listar foi chamado');
         $.ajax({
             url: pag + "/listar.php",
             method: 'POST',
@@ -166,6 +169,37 @@ $pag = "clientes";
 
             success: function(result) {
                 $("#listar_cidades").html(result);
+            }
+        });
+    }
+
+    function buscarDados() {
+        var tel = $('#telefone_busca').val();
+        console.log(cpf);
+        $.ajax({
+            url: pag + "/listar_dados.php",
+            method: 'POST',
+            data: {
+                tel
+            },
+            dataType: "html",
+
+            success: function(result) {
+                var separar = result.split('*');
+                if (separar[0] == '') {
+                    limparCampos();
+                } else {
+                    console.log(separar[0]);
+                    $("#id").val(separar[0]);
+                    $("#nome").val(separar[1]);
+                    $("#telefone").val(separar[2]);
+                    $("#pessoa").val(separar[3]).change();
+                    $("#cpf").val(separar[4]);
+                    $("#estado").val(separar[6]).change();
+                    setTimeout(function() {
+                        $('#cidade').val(separar[5]).change();
+                    }, 400);
+                }
             }
         });
     }
